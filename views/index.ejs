@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Great Number Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script
+    src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function(){
+        $('form').submit(function(){
+            let myNum = document.getElementById("mynum").value
+            if(myNum > <%= number %>){
+            $('#judgement').html(`<div class='text-center' style='color: white; background-color: red; margin: auto; width: 150px; padding: 20px; border: solid black 2px;'><h4> ${myNum} is too high!! </h4></div><br>`)
+        } else if(myNum < <%= number %>) {
+            $('#judgement').html(`<div class='text-center' style='color: white; background-color: red; margin: auto; width: 150px; padding: 20px; border: solid black 2px;'><h4> ${myNum} is too low!! </h4></div><br>`)
+        } else if(myNum == <%= number %>) {
+            $('#judgement').html(`<div class='text-center' style='color: white; background-color: green; margin: auto; width: 150px; padding: 20px; border: solid black 2px;'><h4> you win!<br>The number was ${myNum}</h4></div><br>`)
+            $('form').hide()
+            $('#judgement').append("<a href='/'><button>Play Again</button></a>")
+        }
+            console.log(myNum);
+            console.log(<%= number %>);
+            return false;
+        })
+
+    });
+    </script>
+</head>
+<body>
+<div class = "container">
+    <div class = "row">
+        <div class = "col-md-1"></div>
+        <div class = "col-md-10">
+        <div class = "jumbotron" style="border: solid 2px rgb(56, 49, 9);">
+            <h1 class="text-center">Welcome to the Great Number Game!</h1>
+            <h3 class="text-center">I am thinking of a number between 1 and 100</h3>
+            <h3 class="text-center">Take a guess!</h3>
+            <div id="judgement" class="text-center"></div>
+            <form action="/check" method="post" class="text-center">
+                <input type="text" name="number" id="mynum" ><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <div class = "col-md-1"></div>
+    </div>   
+</div>
+
+</body>
+</html>
+
